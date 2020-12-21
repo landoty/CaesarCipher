@@ -1,2 +1,2 @@
 # CaesarCipher
-A small, 100-line CaesarCipher including command line arguments for succinct functionality
+A small, 100-line Caesar Cipher including command line arguments for succinct functionality. Includes both encryption and decryption options
