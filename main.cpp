@@ -8,7 +8,11 @@ std::string encrypt(std::string cipherTxt)
 
     std::cout << "Enter an encryption key: ";
     std::cin >> key;
-
+    //Since the alphabet is 26 letters long, this will make a key between 1 and 26
+    while(key > 26)
+    {
+        key -= 26;
+    }
     for(int i = 0; i < cipherTxt.length(); ++i)
     {
         currentLetter = cipherTxt[i];
@@ -16,7 +20,6 @@ std::string encrypt(std::string cipherTxt)
         if(currentLetter >= 'a' && currentLetter <= 'z')
         {
             currentLetter += key;
-            cipherTxt[i] = currentLetter;
             //bound by letters only. Will go to start of alphabet if goes past 'z'
             if(currentLetter > 'z')
             {
@@ -32,8 +35,8 @@ std::string encrypt(std::string cipherTxt)
             {
                 currentLetter = currentLetter - 'Z' + 'A' - 1;
             }
-            cipherTxt[i] = currentLetter;
         }
+        cipherTxt[i] = currentLetter;
     }
     return(cipherTxt);
 }
@@ -44,7 +47,10 @@ std::string decrypt(std::string decipherTxt)
 
     std::cout << "Enter a decryption key: ";
     std::cin >> key;
-
+    while(key > 26)
+    {
+        key -= 26;
+    }
     //algorithm is the same as encryption, but subtracts key instead of adding it
     for(int i = 0; i < decipherTxt.length(); ++i)
     {
@@ -52,7 +58,6 @@ std::string decrypt(std::string decipherTxt)
         if(currentLetter >= 'a' && currentLetter <= 'z')
         {
             currentLetter -= key;
-            decipherTxt[i] = currentLetter;
             if(currentLetter > 'z')
             {
                 //Same thought process again, instead protecting from letter being less than 'a'
@@ -68,6 +73,7 @@ std::string decrypt(std::string decipherTxt)
             }
             decipherTxt[i] = currentLetter;
         }
+        decipherTxt[i] = currentLetter;
     }
     return(decipherTxt);
 }
