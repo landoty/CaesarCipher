@@ -52,7 +52,7 @@ std::string decrypt(std::string decipherTxt)
         if(currentLetter >= 'a' && currentLetter <= 'z')
         {
             currentLetter -= key;
-            dText[i] = currentLetter;
+            decipherTxt[i] = currentLetter;
             if(currentLetter > 'z')
             {
                 //Same thought process again, instead protecting from letter being less than 'a'
