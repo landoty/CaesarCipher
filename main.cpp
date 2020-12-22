@@ -19,21 +19,28 @@ std::string encrypt(std::string cipherTxt)
         //if letter is lowercase
         if(currentLetter >= 'a' && currentLetter <= 'z')
         {
-            currentLetter += key;
             //bound by letters only. Will go to start of alphabet if goes past 'z'
-            if(currentLetter > 'z')
+            //or if key puts current letter past the values of ascii letters
+            if(currentLetter + key > 'z')
             {
-                currentLetter = currentLetter - 'z' + 'a' - 1;
+                currentLetter = currentLetter + key - 'z' + 'a' - 1;
+            }
+            else
+            {
+                currentLetter += key;
             }
         }
         //else if letter is uppercase
         else if(currentLetter >= 'A' && currentLetter <= 'Z')
         {
-            currentLetter += key;
             //still protected against spillover
-            if(currentLetter > 'Z')
+            if(currentLetter + key > 'Z')
             {
-                currentLetter = currentLetter - 'Z' + 'A' - 1;
+                currentLetter = currentLetter + key - 'Z' + 'A' - 1;
+            }
+            else
+            {
+                currentLetter += key;
             }
         }
         cipherTxt[i] = currentLetter;
@@ -57,21 +64,26 @@ std::string decrypt(std::string decipherTxt)
         currentLetter = decipherTxt[i];
         if(currentLetter >= 'a' && currentLetter <= 'z')
         {
-            currentLetter -= key;
-            if(currentLetter > 'z')
+            if(currentLetter - key < 'a')
             {
                 //Same thought process again, instead protecting from letter being less than 'a'
-                currentLetter = currentLetter + 'z' - 'a' + 1;
+                currentLetter = currentLetter - key + 'z' - 'a' + 1;
+            }
+            else
+            {
+                currentLetter -= key;
             }
         }
         else if(currentLetter >= 'A' && currentLetter <= 'Z')
         {
-            currentLetter -= key;
-            if(currentLetter > 'Z')
+            if(currentLetter - key < 'A')
             {
-                currentLetter = currentLetter + 'Z' - 'A' + 1;
+                currentLetter = currentLetter - key + 'Z' - 'A' + 1;
             }
-            decipherTxt[i] = currentLetter;
+            else
+            {
+                currentLetter -= key;
+            }
         }
         decipherTxt[i] = currentLetter;
     }
