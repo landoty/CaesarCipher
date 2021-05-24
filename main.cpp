@@ -100,11 +100,11 @@ int main(int argc, char** argv)
     {
         std::string plainText = argv[1];
         std::string type = argv[2];
-        if(type == "encrypt" || type == "Encrypt")
+        if(type == "e" || type == "E")
         {
             std::cout << encrypt(plainText) << "\n";
         }
-        else if(type == "decrypt" || type == "Decrypt")
+        else if(type == "d" || type == "D")
         {
             std::cout << decrypt(plainText) << "\n";
         }
